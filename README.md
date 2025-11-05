@@ -4,23 +4,23 @@ A modern, full-stack online examination platform built with Next.js 16, TypeScri
 
 ## 🚀 Features
 
-- **Authentication System**
-  - OTP-based login
-  - JWT token authentication with refresh mechanism
-  - Profile creation with image upload
-  
-- **Exam Management**
-  - Real-time timer
-  - Question navigation
-  - Mark questions for review
-  - Color-coded question status
-  - Auto-submit on timeout
-  
-- **Modern UI/UX**
-  - Fully responsive design
-  - Tailwind CSS styling
-  - Smooth animations
-  - Accessible components
+### Authentication System
+- OTP-based login
+- JWT token authentication with refresh mechanism
+- Profile creation with image upload
+
+### Exam Management
+- Real-time timer with auto-submit on timeout
+- Question navigation with grid view
+- Mark questions for review
+- Color-coded question status indicators
+- Support for questions with images
+
+### Modern UI/UX
+- Fully responsive design
+- Tailwind CSS styling
+- Smooth animations and transitions
+- Accessible components with ARIA labels
 
 ## 📋 Prerequisites
 
@@ -29,25 +29,20 @@ A modern, full-stack online examination platform built with Next.js 16, TypeScri
 
 ## 🛠️ Installation & Setup
 
-### 1. Clone or Create Project
+### 1. Clone the Repository
 
 ```bash
-# Create new Next.js project
-npx create-next-app@latest nexlearn --typescript --tailwind --app --src-dir
-
-# Navigate to project directory
+git clone https://github.com/sayyidmarvanvt/nexlearn.git
 cd nexlearn
 ```
 
 ### 2. Install Dependencies
 
 ```bash
-npm install @reduxjs/toolkit react-redux axios lucide-react
+npm install
 ```
 
 ### 3. Project Structure
-
-Create the following folder structure:
 
 ```
 nexlearn/
@@ -55,35 +50,35 @@ nexlearn/
 │   ├── app/
 │   │   ├── layout.tsx
 │   │   ├── page.tsx
-│   │   ├── providers.tsx
 │   │   ├── globals.css
 │   │   ├── (auth)/
 │   │   │   ├── layout.tsx
-│   │   │   ├── login/page.tsx
+│   │   │   ├── page.tsx
 │   │   │   ├── otp/page.tsx
 │   │   │   └── details/page.tsx
-│   │   ├── instructions/page.tsx
 │   │   ├── exam/page.tsx
+│   │   ├── instructions/page.tsx
 │   │   └── result/page.tsx
 │   ├── components/
 │   │   └── ui/
 │   │       ├── Button.tsx
 │   │       ├── Input.tsx
 │   │       ├── Card.tsx
-│   │       ├── OTPInput.tsx
-│   │       └── ImageUpload.tsx
+│   │       ├── Checkbox.tsx
+│   │       ├── Dialog.tsx
+│   │       ├── FloatingInput.tsx
+│   │       ├── AuthWrapper.tsx
+│   │       └── ThemeProvider.tsx
 │   ├── lib/
-│   │   ├── api.ts
-│   │   ├── auth.ts
+│   │   ├── axiosClient.ts
 │   │   └── utils.ts
 │   ├── store/
 │   │   ├── index.ts
 │   │   ├── hooks.ts
 │   │   ├── authSlice.ts
 │   │   └── examSlice.ts
-│   └── types/
-│       ├── auth.ts
-│       └── exam.ts
+│   └── hooks/
+│       └── useApiAuth.ts
 ├── next.config.ts
 ├── tailwind.config.ts
 ├── tsconfig.json
@@ -112,92 +107,98 @@ https://nexlearn.noviindusdemosites.in/
 ### Available Endpoints
 
 #### Authentication
-- `POST /auth/send-otp` - Send OTP to mobile
-- `POST /auth/verify-otp` - Verify OTP
-- `POST /auth/create-profile` - Create user profile
-- `POST /auth/logout` - Logout user
+- `POST /auth/send-otp` - Send OTP to mobile number
+- `POST /auth/verify-otp` - Verify OTP and get tokens
+- `POST /auth/create-profile` - Create user profile with image
+- `POST /auth/logout` - Logout user and invalidate tokens
 
 #### Exam
-- `GET /question/list` - Get all questions (requires auth)
-- `POST /answers/submit` - Submit exam answers (requires auth)
+- `GET /question/list` - Get all exam questions (requires authentication)
+- `POST /answers/submit` - Submit exam answers (requires authentication)
 
 ## 🏗️ Architecture
 
-### State Management (Redux)
+### State Management (Redux Toolkit)
 
 **Auth Slice:**
-- User information
+- User information and profile data
 - Authentication status
 - Mobile number storage
+- Token management
 
 **Exam Slice:**
-- Questions data
-- User answers
-- Marked questions
-- Timer state
+- Questions data and metadata
+- User answers tracking
+- Marked questions for review
+- Timer state management
 - Current question index
 
 ### Key Technologies
 
 - **Next.js 16** - App Router with Server Components
-- **TypeScript** - Strict type checking
-- **Tailwind CSS** - Utility-first styling
-- **Redux Toolkit** - State management
-- **Axios** - HTTP client with interceptors
-- **Lucide React** - Icon library
+- **TypeScript** - Full type safety and strict type checking
+- **Tailwind CSS** - Utility-first styling framework
+- **Redux Toolkit** - Predictable state management
+- **Axios** - HTTP client with interceptors for auth
+- **Lucide React** - Modern icon library
 
 ## 📱 Pages Overview
 
-### 1. Login (`/login`)
-- Mobile number input
-- OTP request
-- Form validation
+### 1. Login (`/`)
+- Mobile number input with validation
+- OTP request functionality
+- Form validation and error handling
 
 ### 2. OTP Verification (`/otp`)
-- 4-digit OTP input
-- Auto-focus and paste support
+- 4-digit OTP input with auto-focus
+- Auto-advance between input fields
+- Paste support for convenience
 - Resend OTP functionality
 
 ### 3. User Details (`/details`)
-- Profile image upload
-- Name, email, qualification
+- Profile image upload with preview
+- Name, email, and qualification fields
 - Form validation
+- Profile creation
 
 ### 4. Instructions (`/instructions`)
-- Exam overview
+- Exam overview and duration
 - Rules and guidelines
 - Question statistics
+- Start exam button
 
 ### 5. Exam (`/exam`)
 - Question display with image support
-- Multiple choice options
+- Multiple choice options (A, B, C, D)
 - Question grid navigation
-- Mark for review
-- Real-time timer
+- Mark for review functionality
+- Real-time countdown timer
 - Auto-submit on timeout
+- Submit exam button
 
 ### 6. Result (`/result`)
-- Score summary
+- Overall score summary
 - Correct/Wrong/Skipped breakdown
 - Performance metrics
 - Accuracy percentage
+- Visual progress indicators
 
 ## 🎨 Design Features
 
-- **Responsive Design** - Mobile-first approach
-- **Gradient Backgrounds** - Modern aesthetic
-- **Smooth Animations** - Enhanced UX
-- **Color-Coded States** - Easy visual feedback
+- **Responsive Design** - Mobile-first approach with breakpoints
+- **Gradient Backgrounds** - Modern aesthetic with purple/blue themes
+- **Smooth Animations** - Enhanced UX with transitions
+- **Color-Coded States** - Visual feedback for question status
 - **Accessibility** - Semantic HTML and ARIA labels
 
-## 🔒 Security
+## 🔒 Security Features
 
 - JWT token authentication
-- Token refresh mechanism
-- Axios interceptors for auth
+- Automatic token refresh mechanism
+- Axios interceptors for authentication
 - CORS handling via Next.js rewrites
-- Input validation
-- Protected routes
+- Client-side input validation
+- Protected routes with authentication checks
 
 ## 📦 Build & Deployment
 
@@ -213,66 +214,86 @@ npm run build
 npm start
 ```
 
-### Deployment Options
+### Deployment
 
-- **Vercel** (Recommended)
+**Vercel (Recommended):**
+1. Push code to GitHub
+2. Import repository in Vercel
+3. Deploy automatically
 
-## 🧪 Testing Credentials
+**Live Demo:** [https://nexlearn-test.vercel.app](https://nexlearn-test.vercel.app)
 
-Use any 10-digit mobile number for testing. OTP will be sent to the provided number.
+## 🧪 Testing
 
-## 📝 Code Quality
+Use any valid 10-digit mobile number for testing. The OTP will be sent to the provided number via the API.
 
-- **TypeScript** - Full type safety
-- **ESLint** - Code linting
+## 📝 Code Quality Standards
+
+- **TypeScript** - Full type safety throughout the application
+- **ESLint** - Code linting for consistency
 - **Strict Mode** - Enhanced error checking
-- **Component Reusability** - DRY principle
-- **Clean Code** - Clear naming conventions
+- **Component Reusability** - DRY (Don't Repeat Yourself) principle
+- **Clean Code** - Clear naming conventions and comments
 
-## 🚨 Common Issues & Solutions
+## 🚨 Troubleshooting
 
 ### CORS Errors
-- Ensure dev server runs on `localhost:3000`
-- Check `next.config.ts` rewrites
+- Ensure the dev server runs on `localhost:3000`
+- Verify `next.config.ts` rewrites configuration
 
-### Token Issues
-- Clear localStorage
-- Re-login to get fresh tokens
+### Authentication Issues
+- Clear browser localStorage
+- Re-login to obtain fresh tokens
+- Check network tab for API responses
 
 ### Build Errors
-- Delete `.next` folder
+- Delete `.next` folder and `node_modules`
 - Run `npm install` again
-- Check TypeScript errors
+- Check for TypeScript errors with `npm run build`
 
 ## 📈 Performance Optimizations
 
 - Next.js automatic code splitting
-- Image optimization
-- Route prefetching
+- Image optimization with Next.js Image component
+- Route prefetching for faster navigation
 - Redux middleware optimization
-- Tailwind CSS purging
+- Tailwind CSS purging for minimal bundle size
+- Lazy loading of components
 
-## 🤝 Contributing
+## 👨‍💻 Development Timeline
 
-This is a test project. No contributions accepted.
+**Total Development Time: 20-25 hours**
+
+- **Day 1 (UI Development):** 10-12 hours
+  - Project setup and configuration
+  - Component library creation
+  - Page layouts and routing
+  
+- **Day 2 (Integration & Logic):** 8-9 hours
+  - API integration with Axios
+  - Redux state management setup
+  - Authentication flow implementation
+  - Exam workflow logic
+  
+- **Remaining Time (Polish & Fixes):** 5-6 hours
+  - Bug fixes and testing
+  - UI/UX refinements
+  - Code refactoring
+  - Documentation
 
 ## 📄 License
 
-Proprietary - For Noviindus evaluation only
+Proprietary - Created for Noviindus Technologies evaluation
 
-## 👨‍💻 Development Time
+## 👤 Author
 
-Total estimated development time: **12-15 hours**
-- Setup & Configuration: 2 hours
-- Authentication Flow: 3 hours
-- Exam System: 4 hours
-- UI/UX Polish: 3 hours
-- Testing & Debugging: 2 hours
+**Sayyid Marvan VT**
 
-## 📞 Support
+- GitHub: [@sayyidmarvanvt](https://github.com/sayyidmarvanvt)
+- Project Repository: [nexlearn](https://github.com/sayyidmarvanvt/nexlearn)
 
-For issues or questions, contact the development team.
+## 🙏 Acknowledgments
+
+Developed as part of the Next.js Level 2 Machine Test for Noviindus Technologies LLP.
 
 ---
-
-**Built with ❤️ using Next.js 16, TypeScript, and Tailwind CSS**
