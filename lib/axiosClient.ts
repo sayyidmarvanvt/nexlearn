@@ -1,6 +1,5 @@
 import axios from "axios";
 import { store } from "@/store";
-import { logout } from "@/store/authSlice";
 
 const api = axios.create({
   baseURL: "/", // Uses your Next.js rewrite
