@@ -13,14 +13,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
-    domains: ["nexlearn.noviindusdemosites.in"],
-    unoptimized: true,
+    unoptimized: true, 
   },
 };
 
