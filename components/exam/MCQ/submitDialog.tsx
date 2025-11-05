@@ -21,7 +21,7 @@ export default function SubmitDialog({
 }: any) {
   const stats = [
     {
-      src: "/timer.svg",
+      src: "/clock.svg",
       color: "#1C3141",
       label: "Remaining Time:",
       value: remainingTime,
